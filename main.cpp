@@ -1,26 +1,53 @@
-﻿#include <stdio.h>
+﻿#include <Windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-int Recursive(int h, int j, int m) {
+typedef void (*newType)(int*, int*);
 
-	if (h <= 0) {
-		return j;
+void Lottery(int* select, int* num) {
+
+	printf("サイコロの目は%dでした。\n", *num);
+
+	if (*select == 1) {
+		if (*num == 1 || *num == 3 || *num == 5) {
+			printf("半です");
+		} else {
+			printf("丁です");
+		}
 	}
 
-	return Recursive(h - 1, j += m, m * 2 - 50);
+	if (*select == 2) {
+		if (*num == 0 || *num == 2 || *num == 4 || *num == 6) {
+			printf("丁です");
+		} else {
+			printf("半です");
+		}
+	}
+}
+
+void SetTimeout(newType calc, int second, int select, int num) {
+
+	Sleep(second * 1000);
+
+	calc(&select, &num);
 }
 
 int main() {
+	// ランダム関数
+	srand((unsigned int)time(NULL));
+	newType calc;
 
-	int hour = 4;
-	int money = 100;
-	int total = 0;
-	int normal = 1072;
+	calc = Lottery;
+	int num;
+	int select = 0;
 
-	int result;
+	printf("半か丁を選んでください\n");
+	printf("1と入力すると半、2と入力すると丁になります\n");
+	scanf_s("%d", &select);
+	num = 1 + rand() % 6;
 
-	result = Recursive(hour, total, money);
-
-	printf("3時間働いた一般賃金体系 : %d     再帰的な賃金体系 : %d", normal * hour, result);
+	SetTimeout(calc, 3, select, num);
 
 	return 0;
 }
