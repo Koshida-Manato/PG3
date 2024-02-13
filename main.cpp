@@ -1,19 +1,19 @@
-﻿#include <stdio.h>
-#include "Animal.h"
-#include "Dog.h"
-#include "Cat.h"
+﻿#include "Circle.h"
+#include "IShape.h"
+#include "Rectangle.h"
+#include <stdio.h>
 
 int main() {
-	Animal* animal_[2];
+
+	IShape* isAhape_[2];
+
+	isAhape_[0] = new Circle;
+	isAhape_[1] = new Rectangle;
+
 	for (int i = 0; i < 2; i++) {
-		if (i < 1) {
-			animal_[i] = new Dog;
-		} else {
-			animal_[i] = new Cat;
-		}
+		isAhape_[i]->Size();
+		isAhape_[i]->Draw();
 	}
-	for (int i = 0; i < 2; i++) {
-		animal_[i]->Cry();
-	}
+
 	return 0;
 }
