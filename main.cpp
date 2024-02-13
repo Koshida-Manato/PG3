@@ -1,19 +1,22 @@
-﻿#include "Circle.h"
-#include "IShape.h"
-#include "Rectangle.h"
-#include <stdio.h>
+﻿#include <stdio.h>
+#include <thread>
+
+void Print1() { printf("thread1\n"); }
+
+void Print2() { printf("thread2\n"); }
+
+void Print3() { printf("thread3\n"); }
 
 int main() {
 
-	IShape* isAhape_[2];
+	std::thread th1(Print1);
+	th1.join();
 
-	isAhape_[0] = new Circle;
-	isAhape_[1] = new Rectangle;
+	std::thread th2(Print2);
+	th2.join();
 
-	for (int i = 0; i < 2; i++) {
-		isAhape_[i]->Size();
-		isAhape_[i]->Draw();
-	}
+	std::thread th3(Print3);
+	th3.join();
 
 	return 0;
 }
