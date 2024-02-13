@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 void Circle::Size() {
-	radius = 32;
+	radius = 20;
 	area = radius * radius * pi;
 }
 

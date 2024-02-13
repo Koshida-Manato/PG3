@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 void Rectangle::Size() {
-	diagonal = 20;
+	diagonal = 10;
 	area = diagonal * diagonal / 2;
 }
 
